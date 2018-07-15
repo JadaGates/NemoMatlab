@@ -17,15 +17,15 @@ clear all;
 close all;
 
 %%- - - Initializing Parameter - - -%%
-FileFlag = 1;
+FileFlag = 0;
 ChannelNum = 4;
 ClipDataLength = 2048;
 FormatFlag = 0;
 SampleRate = 200e3;
-DataClip.Start = 100;
-DataClip.End = 120;
+DataClip.Start = 20;
+DataClip.End = 200;
 DataClip.Coff = 1024;
-fp = 'E:\AUV\Robosub2018\Dataontainer\0705basin\07052216.bin';
+fp = 'D:\Dataontainer\0713pool\07_13_15_11.bin';
 
 if(contains(fp, 'bin'))
     FormatFlag = 1;
@@ -42,14 +42,14 @@ end
 data_float = data(DataClip.Coff * DataClip.Start : DataClip.Coff * DataClip.End, :);
 figure
 figloc
-plot(data_float(:, 1));
+plot(data_float(:, 3));
 figure
 figloc
 signal = data_float;
 DataClipStart = 1;
 DataClipEnd = length(data_float);
 DataLength = DataClipEnd - DataClipStart;
-DataField = data_float(DataClipStart : DataClipEnd , 1);
+DataField = data_float(DataClipStart : DataClipEnd , 3);
 f = SampleRate * (0 :  DataLength) / DataLength;
 FFTdat = fft(DataField);
 plot(f , abs(FFTdat));
@@ -58,7 +58,7 @@ xlabel('Frenquency /Hz');title('AUV DataClip FFT');
 
 %%- - - Genareta Storage Path - - -%%
 if FileFlag == 1
-DCS = ['S', num2str(DataClip.Start)];
+DCS = ['_S', num2str(DataClip.Start)];
 DCE = ['E', num2str(DataClip.End)];
 regExp = '(.+\\)(.*)(\..*$)';
 regReplace = ['$1CCS$2' , DCS, DCE, '.bin'];
@@ -87,3 +87,5 @@ end
 fwrite(covertdat, Output, 'float');
 fclose(covertdat);
 end
+% load chirp;
+% sound(y);

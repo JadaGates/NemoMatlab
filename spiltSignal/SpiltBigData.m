@@ -45,7 +45,7 @@ try
             DeSpilt = 2 * Channels * spiltNums;
             spiltLength = FileInfo.bytes / DeSpilt;     % 2 * Channels * spiltNums
             auvdat = fopen(fl, 'r');
-            for counter_j = 1 : 16
+            for counter_j = 1 : spiltNums
                 DataTemp = fread(auvdat, [Channles, spiltLength], 'int16')';
                 if isempty(DataTemp)
                     errorinfo = ['counter_j = ', num2str(counter_j) , ' is empty'];

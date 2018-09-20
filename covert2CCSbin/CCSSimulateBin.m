@@ -25,15 +25,7 @@ SampleRate = 200e3;
 DataClip.Start = 1;
 DataClip.End = 600;
 DataClip.Coff = 1024;
-<<<<<<< HEAD
-<<<<<<< HEAD
-fp = 'E:\AUV\Robosub2018\Dataontainer\06272200.bin';
-=======
-fp = 'D:\Dataontainer\0718Pool\07_18_22_09.bin';
->>>>>>> e780472568876bf3f0e3a8132c13013b79ddc6cc
-=======
 fp = 'E:\AUV\Robosub2018\Dataontainer\0705basin\07052216.bin';
->>>>>>> parent of b6d10db... minor adjustment
 
 if(contains(fp, 'bin'))
     FormatFlag = 1;

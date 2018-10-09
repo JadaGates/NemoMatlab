@@ -17,8 +17,7 @@ clear all;
 close all;
 
 %%- - - Initializing Parameter - - -%%
-FormatFlag = 0;
-FileFlag = 1;
+FileFlag = 0;
 ChannelNum = 4;
 ClipDataLength = 2048;
 SampleRate = 200e3;
@@ -27,6 +26,7 @@ DataClip.End = 600;
 DataClip.Coff = 1024;
 fp = 'E:\AUV\Robosub2018\Dataontainer\0705basin\07052216.bin';
 
+FormatFlag = 0;
 if(contains(fp, 'bin'))
     FormatFlag = 1;
 end
@@ -41,7 +41,7 @@ end
 if DataClip.Start ~= 0
     data_float = data(DataClip.Coff * DataClip.Start : DataClip.Coff * DataClip.End - 1, :);  % section of data
 else
-    data_float = data;  % section of data
+    data_float = data;
     DataClip.Start = 'a';
     DataClip.End = 'n';
 end
@@ -78,9 +78,8 @@ if FileFlag == 1
     regExp = '(.+\\)(.*)(\..*$)';
     regReplace = ['$1CCS$2' , DCS, DCE, '.bin'];
     fw = regexprep(fp, regExp, regReplace)    %#ok
-    covertdat = fopen(fw, 'wb');
     
-    %- - - Copy Storage Path to Clipboard  - - -%%
+    %%- - - Copy Storage Path to Clipboard  - - -%%
     ClipPath = strrep(fw, '\', '\\');
     clipboard('copy',ClipPath);
     
@@ -88,11 +87,12 @@ if FileFlag == 1
     dataLength = length(data_float);
     WData = zeros(2 * dataLength, 4);
     WData(1 : 2 : end, :) = data_float;
+    
     cellNum = 2 * dataLength / ClipDataLength;
     cellStyle = ClipDataLength * ones(1, cellNum);
     Data_in_Cell = mat2cell(WData, cellStyle, ChannelNum);
-    RESULT = cellfun(@(x) x(:)', Data_in_Cell,'uniformOutput',false);
-    Output = cat(2,RESULT{:});
+    RESULT = cellfun(@(x) x(:)', Data_in_Cell, 'uniformOutput', false);
+    Output = cat(2, RESULT{:});
     
     %     kronMatrix = kron(eye(ChannelNum, ChannelNum), [1 ; 0]);
     %     %- - - Insert a zeros row every one row - - -%%
@@ -107,12 +107,12 @@ if FileFlag == 1
     %         vectorTemp = reshape(temp, [], 1);
     %         Output = [Output; vectorTemp];
     %     end
-    
+    covertdat = fopen(fw, 'wb');
     fwrite(covertdat, Output, 'float');
     fclose(covertdat);
 end
 if FileFlag == 1
-    %     load chirp;
-    load handel.mat
-    sound(y);
+    load calorie.mat
+    fs = 44100;
+    sound(calorie, cfs);
 end

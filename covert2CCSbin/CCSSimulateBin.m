@@ -2,7 +2,6 @@
 %   This Program is written by
 
 %            JingX
-
 % input filepath, it's will convert
 % data format from ADC format
 % to CCS format for simulation,
@@ -81,7 +80,7 @@ if FileFlag == 1
     
     %%- - - Copy Storage Path to Clipboard  - - -%%
     ClipPath = strrep(fw, '\', '\\');
-    clipboard('copy',ClipPath);
+    clipboard('copy', ClipPath);
     
     %%- - - Convert Data - - -%%
     dataLength = length(data_float);

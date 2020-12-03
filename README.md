@@ -7,5 +7,6 @@
 
 It mainly contains Nemo's matlab peripheral subroutines for daily simulation and data processing.
 
-spiltData: The stored bin file will be divided into 16 segments, and the data format is nx4 matrix, which corresponds to the data of 4 channels. The program will display and save the time domain and time frequency map of the segmented signal by default, and finally store the signal as a .mat file.
-covert2CCSbin: The raw data is not suitable for CCS simulation, use matlab to save the data in the format required for CCS simulation and save it.
+1. spiltData: The stored bin file will be divided into 16 segments, and the data format is nx4 matrix, which corresponds to the data of 4 channels. The program will display and save the time domain and time frequency map of the segmented signal by default, and finally store the signal as a .mat file.
+
+2. covert2CCSbin: The raw data is not suitable for CCS simulation, use matlab to save the data in the format required for CCS simulation and save it.
